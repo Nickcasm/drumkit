@@ -2,7 +2,8 @@ const buttons = document.querySelectorAll(".drum");
 for (var i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", function() {
         let key = this.innerHTML;
-        playSound(key);        
+        playSound(key); 
+        applyAnimation(key);
     })
     
 }
@@ -10,12 +11,13 @@ for (var i = 0; i < buttons.length; i++) {
 document.addEventListener("keydown", function(oEvent) {
     let key = oEvent.key;
     playSound(key);
+    applyAnimation(key);
 });
 
 function playSound(key) {
     switch (key) {
         case 'w':
-            var audio = new Audio('./sounds/crash.mp3');
+            var audio = new Audio('./sounds/tom-3.mp3');
             audio.play();
             break;
         case 'a':
@@ -35,7 +37,7 @@ function playSound(key) {
             audio.play();
             break;
         case 'k':
-            var audio = new Audio('./sounds/tom-3.mp3');
+            var audio = new Audio('./sounds/crash.mp3');
             audio.play();
             break;
         case 'l':
@@ -45,4 +47,13 @@ function playSound(key) {
         default:
             break;
     }
+}
+
+function applyAnimation (key) {
+    const button = document.querySelector("."+key);
+    button.classList.add("pressed");
+
+    setTimeout(() => {
+        button.classList.remove("pressed");
+    }, 100)
 }
